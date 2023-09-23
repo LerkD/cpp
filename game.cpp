@@ -7,10 +7,10 @@ using namespace std;
 vector<int> deck = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
 
 // Функция раздачи карт (возвращает вектор из двух случайных карт)
-vector<int> deal(std::vector<int>& deck) {
+vector<int> deal(vector<int>& deck) {
     vector<int> hand;
     for (int i = 0; i < 2; i++) {
-        std::random_shuffle(deck.begin(), deck.end()); // Перемешивание колоды
+        random_shuffle(deck.begin(), deck.end()); // Перемешивание колоды
         int card = deck.back(); // Берем последнюю карту из колоды
         deck.pop_back(); // Удаляем ее из колоды
       // Если карта - 11, 12, 13 или 14, заменяем на J, Q, K или A соответственно
@@ -26,7 +26,7 @@ vector<int> deal(std::vector<int>& deck) {
 void play_again();
 
 // Функция для вычисления суммы очков в руке
-int total(const std::vector<int>& hand) {
+int total(const vector<int>& hand) {
     int total = 0;
     for (int card : hand) {
         if (card == 'J' || card == 'Q' || card == 'K') {
@@ -41,7 +41,7 @@ int total(const std::vector<int>& hand) {
 }
 
 // Функция для взятия еще одной карты из колоды
-std::vector<int> hit(std::vector<int>& hand) {
+std::vector<int> hit(vector<int>& hand) {
     int card = deck.back(); // Берем последнюю карту из колоды
     deck.pop_back(); // Удаляем ее из колоды
     if (card == 11) card = 'J';
@@ -62,25 +62,25 @@ void clear() {
 }
 
 // Функция для вывода результатов игры
-void print_results(const std::vector<int>& dealer_hand, const std::vector<int>& player_hand) {
+void print_results(const vector<int>& dealer_hand, const vector<int>& player_hand) {
     clear();
     cout << "The dealer has a ";
     for (int card : dealer_hand) {
         std::cout << card << " ";
     }
-    cout << "for a total of " << total(dealer_hand) << std::endl;
+    cout << "for a total of " << total(dealer_hand) << endl;
     cout << "You have a ";
     for (int card : player_hand) {
         cout << card << " ";
     }
-    cout << "for a total of " << total(player_hand) << std::endl;
+    cout << "for a total of " << total(player_hand) << endl;
 }
 
 // Функция для проверки на наличие блэкджека (21 очко)
-void blackjack(const std::vector<int>& dealer_hand, const std::vector<int>& player_hand) {
+void blackjack(const vector<int>& dealer_hand, const vector<int>& player_hand) {
     if (total(player_hand) == 21) {
         print_results(dealer_hand, player_hand);
-        std::cout << "Congratulations! You got a Blackjack!\n" << std::endl;
+        cout << "Congratulations! You got a Blackjack!\n" << std::endl;
         play_again();
     } else if (total(dealer_hand) == 21) {
         print_results(dealer_hand, player_hand);
@@ -89,7 +89,7 @@ void blackjack(const std::vector<int>& dealer_hand, const std::vector<int>& play
     }
 }
 // Функция для определения счета игры и вывода сообщения
-void score(const std::vector<int>& dealer_hand, const std::vector<int>& player_hand) {
+void score(const vector<int>& dealer_hand, const vector<int>& player_hand) {
     if (total(player_hand) == 21) {
         print_results(dealer_hand, player_hand);
         cout << "Congratulations! You got a Blackjack!\n" << std::endl;
