@@ -134,20 +134,20 @@ void play_again() {
 void game() {
     string choice;
     clear();
-    std::cout << "WELCOME TO BLACKJACK!\n" << std::endl;
-    std::vector<int> dealer_hand = deal(deck);
-    std::vector<int> player_hand = deal(deck);
+    cout << "WELCOME TO BLACKJACK!\n" << std::endl;
+    vector<int> dealer_hand = deal(deck);
+    vector<int> player_hand = deal(deck);
     while (choice != "q") {
-        std::cout << "The dealer is showing a " << dealer_hand[0] << std::endl;
-        std::cout << "You have a ";
+        cout << "The dealer is showing a " << dealer_hand[0] << std::endl;
+        cout << "You have a ";
         for (int card : player_hand) {
-            std::cout << card << " ";
+            cout << card << " ";
         }
-        std::cout << "for a total of " << total(player_hand) << std::endl;
+        cout << "for a total of " << total(player_hand) << std::endl;
         blackjack(dealer_hand, player_hand);
-        std::cout << "Do you want to [H]it, [S]tand, or [Q]uit: ";
-        std::cin >> choice;
-        std::transform(choice.begin(), choice.end(), choice.begin(), ::tolower);
+        cout << "Do you want to [H]it, [S]tand, or [Q]uit: ";
+        cin >> choice;
+        transform(choice.begin(), choice.end(), choice.begin(), ::tolower);
         clear();
         if (choice == "h") {
             hit(player_hand);
@@ -163,7 +163,7 @@ void game() {
             score(dealer_hand, player_hand);
             play_again();
         } else if (choice == "q") {
-            std::cout << "Bye!" << std::endl;
+            cout << "Bye!" << std::endl;
             exit(0);
         }
     }
