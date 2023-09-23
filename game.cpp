@@ -4,7 +4,7 @@
 
 using namespace std;
 // Исходная колода карт. Значения от 2 до 14 (14 - это туз).
-std::vector<int> deck = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
+vector<int> deck = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
 
 // Функция раздачи карт (возвращает вектор из двух случайных карт)
 vector<int> deal(std::vector<int>& deck) {
@@ -125,7 +125,7 @@ void play_again() {
         deck = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
         game();
     } else {
-        out << "Bye!" << std::endl;
+        cout << "Bye!" << std::endl;
         exit(0);
     }
 }
