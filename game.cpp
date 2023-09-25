@@ -7,7 +7,7 @@ using namespace std;
 vector<int> deck = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
 
 // Функция раздачи карт (возвращает вектор из двух случайных карт)
-vector<int> deal(vector<int>& deck) {
+vector<int> deal(vector<int>& deck) { // Используем &, чтобы иметь возможность менять значения параметра внутри функции, не меняя его за ее пределами 
     vector<int> hand;
     for (int i = 0; i < 2; i++) {
         random_shuffle(deck.begin(), deck.end()); // Перемешивание колоды
