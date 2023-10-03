@@ -2,27 +2,29 @@
 #include <vector>
 #include <algorithm>
 
-using namespace std;
-
+// Исходная колода карт. Значения от 2 до 14 (14 - это туз).
 std::vector<int> deck = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
 
+// Функция раздачи карт (возвращает вектор из двух случайных карт)
 std::vector<int> deal(std::vector<int>& deck) {
     std::vector<int> hand;
     for (int i = 0; i < 2; i++) {
-        std::random_shuffle(deck.begin(), deck.end());
-        int card = deck.back();
-        deck.pop_back();
+        std::random_shuffle(deck.begin(), deck.end()); // Перемешивание колоды
+        int card = deck.back(); // Берем последнюю карту из колоды
+        deck.pop_back(); // Удаляем ее из колоды
+        // Если карта - 11, 12, 13 или 14, заменяем на J, Q, K или A соответственно
         if (card == 11) card = 'J';
         if (card == 12) card = 'Q';
         if (card == 13) card = 'K';
         if (card == 14) card = 'A';
-        hand.push_back(card);
+        hand.push_back(card); // Добавляем карту в руку
     }
     return hand;
 }
 
 void play_again();
 
+// Функция для вычисления суммы очков в руке
 int total(const std::vector<int>& hand) {
     int total = 0;
     for (int card : hand) {
@@ -37,9 +39,10 @@ int total(const std::vector<int>& hand) {
     return total;
 }
 
+// Функция для взятия еще одной карты из колоды
 std::vector<int> hit(std::vector<int>& hand) {
-    int card = deck.back();
-    deck.pop_back();
+    int card = deck.back(); // Берем последнюю карту из колоды
+    deck.pop_back(); // Удаляем ее из колоды
     if (card == 11) card = 'J';
     if (card == 12) card = 'Q';
     if (card == 13) card = 'K';
@@ -48,6 +51,7 @@ std::vector<int> hit(std::vector<int>& hand) {
     return hand;
 }
 
+// Функция для очистки экрана консоли (переносимая между ОС)
 void clear() {
     #ifdef _WIN32
         system("CLS");
@@ -56,6 +60,7 @@ void clear() {
     #endif
 }
 
+// Функция для вывода результатов игры
 void print_results(const std::vector<int>& dealer_hand, const std::vector<int>& player_hand) {
     clear();
     std::cout << "The dealer has a ";
@@ -70,6 +75,7 @@ void print_results(const std::vector<int>& dealer_hand, const std::vector<int>& 
     std::cout << "for a total of " << total(player_hand) << std::endl;
 }
 
+// Функция для проверки на наличие блэкджека (21 очко)
 void blackjack(const std::vector<int>& dealer_hand, const std::vector<int>& player_hand) {
     if (total(player_hand) == 21) {
         print_results(dealer_hand, player_hand);
@@ -81,7 +87,7 @@ void blackjack(const std::vector<int>& dealer_hand, const std::vector<int>& play
         play_again();
     }
 }
-
+// Функция для определения счета игры и вывода сообщения
 void score(const std::vector<int>& dealer_hand, const std::vector<int>& player_hand) {
     if (total(player_hand) == 21) {
         print_results(dealer_hand, player_hand);
@@ -104,8 +110,9 @@ void score(const std::vector<int>& dealer_hand, const std::vector<int>& player_h
     }
 }
 
-void game();
 
+void game();
+// Функция, чтобы сыграть еще раз 
 void play_again() {
     std::string again;
     std::cout << "Do you want to play again? (Y/N): ";
@@ -122,6 +129,7 @@ void play_again() {
     }
 }
 
+// Основная функция игры
 void game() {
     std::string choice;
     clear();
@@ -161,6 +169,6 @@ void game() {
 }
 
 int main() {
-    game();
+    game(); // Запуск игры
     return 0;
 }
